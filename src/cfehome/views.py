@@ -5,4 +5,4 @@ from django.contrib import messages
 
 
 def home_page_view(request,*args, **kwargs) :
-      return HttpResponse("Deployed over the railway server")
+      return HttpResponse("Fuck Off")
