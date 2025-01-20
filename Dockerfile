@@ -43,8 +43,11 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
-# Create the vendor static files directory
-RUN mkdir -p /code/static/vendor/ && chmod -R 777 /code/static/vendor/
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+ARG DJANGO_DEBUG=0
+ENV DJANGO_DEBUG=${DJANGO_DEBUG}
 
 # Run vendor_pull after dependencies are installed
 RUN python manage.py vendor_pull
