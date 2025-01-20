@@ -43,14 +43,11 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
-ARG DJANGO_SECRET_KEY
-ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
-ARG DJANGO_DEBUG=0
-ENV DJANGO_DEBUG=${DJANGO_DEBUG}
 
 # Run vendor_pull after dependencies are installed
-RUN python manage.py vendor_pull
+RUN python manage.py vendor_pull 
+
 
 # database isn't available during build
 # run any other commands that do not need the database
