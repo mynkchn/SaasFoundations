@@ -43,11 +43,16 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
+# Create the vendor static files directory
+RUN mkdir -p /code/static/vendor/ && chmod -R 777 /code/static/vendor/
+
+# Run vendor_pull after dependencies are installed
+RUN python manage.py vendor_pull
 
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
-RUN python manage.py vendor_pull
+
 RUN python manage.py collectstatic --noinput
 
 # set the Django default project name
