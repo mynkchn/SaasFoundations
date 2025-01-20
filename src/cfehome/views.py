@@ -5,4 +5,4 @@ from django.contrib import messages
 
 
 def home_page_view(request,*args, **kwargs) :
-      return HttpResponse("Fuck Off")
+      return render(request,'base.html')
