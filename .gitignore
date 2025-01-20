@@ -1,5 +1,5 @@
 
-
+src/staticfiles/vendors
 .DS_Store
 venv/
 # Byte-compiled / optimized / DLL files
@@ -9,6 +9,7 @@ __pycache__/
 
 # C extensions
 *.so
+local-cdn/
 
 # Distribution / packaging
 .Python
