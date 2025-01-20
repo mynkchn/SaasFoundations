@@ -2,8 +2,7 @@ import helpers
 from typing import Any
 from django.core.management.base import BaseCommand
 from django.conf import settings
-import os
-from pathlib import Path
+
 STATICFILES_VENDOR_DIR=getattr(settings,'STATICFILES_VENDOR_DIR')
 VENDOR_STATICFILES={
     'flowbite.min.css':"https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css",
