@@ -3,6 +3,9 @@
 ARG PYTHON_VERSION=3.12-slim-bullseye
 FROM python:${PYTHON_VERSION}
 
+# Add this to your Dockerfile
+ENV DJANGO_SECRET_KEY="j+01oneq90nch#$)g-kuk9z1!19s*r_nd0c-#ze3l%#_ksv6!9"
+
 # Create a virtual environment
 RUN python -m venv /opt/venv
 
