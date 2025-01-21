@@ -4,10 +4,10 @@ ARG PYTHON_VERSION=3.12-slim-bullseye
 FROM python:${PYTHON_VERSION}
 
 #Replace these with your actual secret values or pass them securely during runtime (like with docker-compose or via Docker's runtime ENV settings)
-ENV DJANGO_SECRET_KEY='django-insecure-31hvlcszgg8qv%(jq)am2b!ou4ajb2zzw_e*m$z@-g6ing2^kn'
-ENV DJANGO_DEBUG=False
-ENV DATABASE_URL="postgresql://neondb_owner:Im7Znlg6PaMT@ep-purple-snowflake-a6b8kpwo.us-west-2.aws.neon.tech/neondb?sslmode=require"
-
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+ARG DJANGO_DEBUG=0
+ENV DJANGO_DEBUG=${DJANGO_DEBUG}
 # Create a virtual environment
 RUN python -m venv /opt/venv
 
