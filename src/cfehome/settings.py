@@ -72,14 +72,19 @@ INSTALLED_APPS = [
     'commando.apps.CommandoConfig',
     # Authentication Check
     # 'auth.apps.AuthConfig',
-    # Authentication using Third Party
-     'allauth',
+    # Authentication using Third Party - remember sequence
+    'allauth_ui',
+    'allauth',
     'allauth.account',
     # requires install using `django-allauth[socialaccount]`.
     'allauth.socialaccount',
     #  include the providers you want to enable:
     'allauth.socialaccount.providers.github',
+    # UI For All Auth
+    "widget_tweaks",
+    "slippers",
 ]
+ALLAUTH_UI_THEME = "dark"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
