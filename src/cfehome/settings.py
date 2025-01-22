@@ -17,6 +17,27 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Email Backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST=config('EMAIL_HOST',cast=str,default='smtp.gmail.com')
+EMAIL_PORT=config('EMAIL_PORT',cast=str,default='587')
+EMAIL_HOST_USER=config('EMAIL_HOST_USER',cast=str,default=None)
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD',cast=str,default=None)
+EMAIL_USE_SSL=config('EMAIL_USE_SSL',cast=bool,default=False)
+EMAIL_USE_TLS=config('EMAIL_USE_TLS',cast=bool,default=False)
+
+ADMIN_USER_NAME=config("ADMIN_USER_NAME", default="Admin user")
+ADMIN_USER_EMAIL=config("ADMIN_USER_EMAIL", default=None)
+
+MANAGERS=[]
+ADMINS=[]
+if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+    ADMINS +=[
+        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
+    ]
+    MANAGERS=ADMINS
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -47,7 +68,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'visits.apps.VisitsConfig',
-    'commando'
+    # Create your own commands
+    'commando.apps.CommandoConfig',
+    # Authentication Check
+    # 'auth.apps.AuthConfig',
+    # Authentication using Third Party
+     'allauth',
+    'allauth.account',
+    # requires install using `django-allauth[socialaccount]`.
+    'allauth.socialaccount',
+    #  include the providers you want to enable:
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +89,27 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+     # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
 
 ROOT_URLCONF = 'cfehome.urls'
 
@@ -76,6 +127,18 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+
+# All Auth Module used for authentication using GitHub
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+
 ]
 
 WSGI_APPLICATION = 'cfehome.wsgi.application'
@@ -150,10 +213,18 @@ STATICFILES_BASE_DIR.mkdir(exist_ok=True,parents=True)
 STATICFILES_VENDOR_DIR=STATICFILES_BASE_DIR/'vendors'
 STATICFILES_DIRS=[STATICFILES_BASE_DIR]
 STATIC_ROOT = BASE_DIR / 'local-cdn'
+#STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STORAGES={
+   
+   'staticfiles': {
+      'BACKEND' : 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    }
 
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

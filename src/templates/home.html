@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% if request.user.is_authenticated%}Login Successfully tested{% endif %}
+
+<h1>There is our home page</h1>
+<p>Page Visits={{pagevisit_count}}</p>
+<p>Total Visits={{total_count}}</p>
+<p>Perecentage={{percent}}</p>
+{% endblock content %}
+
+

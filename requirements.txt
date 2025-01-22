@@ -6,3 +6,5 @@ dj-database-url
 requests
 helpers
 typing
+whitenoise
+django-allauth[socialaccount]
