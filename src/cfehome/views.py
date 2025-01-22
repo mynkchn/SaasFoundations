@@ -14,8 +14,9 @@ def home_page_view(request,*args, **kwargs) :
             
             'pagevisit_count':page_visits.count(),
             'total_count':qs.count(),
-            'percent':(page_visits.count()*100.0)/qs.count(),
+            'percent':(page_visits.count()*100.0)/  qs.count() if qs.count() > 0 else 0,
       }
-      PageVisit.objects.create(path=request.path)
+      if not page_visits.exists():
+        PageVisit.objects.create(path=request.path)
 
       return render(request,'home.html',context)
