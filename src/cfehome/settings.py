@@ -180,9 +180,10 @@ if DATABASE_URL is not None:
  ]
  # Required for cross-site cookies
  CSRF_COOKIE_DOMAIN = '.railway.app'
- CSRF_COOKIE_SECURE = True  # Set to True if you're using HTTPS in production
- CSRF_COOKIE_HTTPONLY = True  # To ensure cookies are not accessible via JavaScript
- CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'Strict' for more strict CSRF protection
+ CSRF_COOKIE_SECURE = True
+ SESSION_COOKIE_SECURE = True
+
+ 
 
  
    
