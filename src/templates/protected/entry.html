@@ -1,0 +1,16 @@
+{% extends "allauth/layouts/base.html" %}
+
+
+{% block content %}
+<h1>
+Enter Password </h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="password" name='code' placeholder="Password">
+    <button type="submit">Submit</button>
+
+    
+</form>
+{% endblock content %}
+
+

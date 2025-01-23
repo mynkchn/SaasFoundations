@@ -26,6 +26,7 @@ EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD',cast=str,default=None)
 EMAIL_USE_SSL=config('EMAIL_USE_SSL',cast=bool,default=False)
 EMAIL_USE_TLS=config('EMAIL_USE_TLS',cast=bool,default=False)
 
+# Settings for Email Sending to given mail
 ADMIN_USER_NAME=config("ADMIN_USER_NAME", default="Admin user")
 ADMIN_USER_EMAIL=config("ADMIN_USER_EMAIL", default=None)
 
@@ -104,15 +105,9 @@ MIDDLEWARE = [
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
+    'github':{
+       'VERIFIED_EMAIL': True
+       
     }
 }
 
@@ -228,6 +223,7 @@ STATICFILES_DIRS=[STATICFILES_BASE_DIR]
 STATIC_ROOT = BASE_DIR / 'local-cdn'
 #STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# White Noise to Serve Static files
 STORAGES={
    
    'staticfiles': {
@@ -235,6 +231,7 @@ STORAGES={
     }
 
 }
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

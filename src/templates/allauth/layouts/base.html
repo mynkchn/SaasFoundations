@@ -15,12 +15,13 @@
         
         {% block extra_head %}
             <link rel="stylesheet" href="{% static 'allauth_ui/output.css' %}">
+            {% include "base/css.html" %}
         {% endblock extra_head %}
     </head>
     <body class="min-h-screen bg-base-300">
        
         {% block body %}
-         {% include "base.html" %}
+          {% include "nav/navbar.html" %}
         
             {% if messages %}
                 {% for message in messages %}
@@ -68,6 +69,7 @@
         {% endblock body %}
         {% block extra_body %}
         {% endblock extra_body %}
+        {% include "base/js.html" %}
         
     </body>
 </html>
