@@ -84,7 +84,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "slippers",
 ]
-ALLAUTH_UI_THEME = "dark"
+ALLAUTH_UI_THEME = 'light'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

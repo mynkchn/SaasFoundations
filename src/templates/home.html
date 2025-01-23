@@ -1,7 +1,8 @@
-{% extends "base.html" %}
+{% extends "allauth/layouts/base.html" %}
 
 
 {% block content %}
+
 
 {% if request.user.is_authenticated%}Login Successfully tested{% endif %}
 
@@ -9,6 +10,7 @@
 <p>Page Visits={{pagevisit_count}}</p>
 <p>Total Visits={{total_count}}</p>
 <p>Perecentage={{percent}}</p>
+
 {% endblock content %}
 
 
