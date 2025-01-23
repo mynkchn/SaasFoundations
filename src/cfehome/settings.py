@@ -139,7 +139,7 @@ ACCOUNT_AUTHENTICATION_METHOD='username_email'
 ACCOUNT_EMAIL_REQUIRED=True
 ACCOUNT_EMAIL_VERIFICATION='mandatory'
 # ACCOUNT_EMAIL_SUBJECT_PREFIX-"[CFE]"
-SECURE_SSL_REDIRECT = True
+
 
 
 # All Auth Module used for authentication using GitHub
@@ -183,6 +183,9 @@ if DATABASE_URL is not None:
  CSRF_TRUSTED_ORGINS=[
     'https://saasfoundations-production-014d.up.railway.app/',
  ]
+ CSRF_COOKIE_SECURE = True  # If using HTTPS, ensure this is True
+ CSRF_COOKIE_HTTPONLY = True
+ CSRF_COOKIE_SAMESITE = 'None'  # Required for cross-site cookies
  
    
 # Password validation
