@@ -183,9 +183,7 @@ if DATABASE_URL is not None:
  CSRF_TRUSTED_ORGINS=[
     'https://saasfoundations-production-014d.up.railway.app/',
  ]
- CSRF_COOKIE_SECURE = True  # If using HTTPS, ensure this is True
- CSRF_COOKIE_HTTPONLY = True
- CSRF_COOKIE_SAMESITE = 'None'  # Required for cross-site cookies
+ # Required for cross-site cookies
  
    
 # Password validation
