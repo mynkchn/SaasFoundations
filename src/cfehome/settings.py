@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     # UI For All Auth
     "widget_tweaks",
     "slippers",
+    'profiles.apps.ProfilesConfig',
 ]
 ALLAUTH_UI_THEME = 'light'
 
@@ -179,9 +180,9 @@ if DATABASE_URL is not None:
     'https://saasfoundations-production-014d.up.railway.app/',
  ]
  # Required for cross-site cookies
- CSRF_COOKIE_DOMAIN = '.railway.app'
- CSRF_COOKIE_SECURE = True
- SESSION_COOKIE_SECURE = True
+#  CSRF_COOKIE_DOMAIN = '.railway.app'
+#  CSRF_COOKIE_SECURE = True
+#  SESSION_COOKIE_SECURE = True
 
  
 
@@ -237,6 +238,8 @@ STORAGES={
     }
 
 }
+
+
 
 
 # Default primary key field type
