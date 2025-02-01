@@ -22,6 +22,6 @@ from .import views
 
 urlpatterns = [
   
-    path('<username>/',views.profile_view,name='profiles')
+    path('<str:username>/',views.profile_view,name='profiles')
 ]
 
