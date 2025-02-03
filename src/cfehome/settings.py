@@ -37,6 +37,10 @@ if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
         (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
     ]
     MANAGERS=ADMINS
+# OPEN AI 
+OPENAI_SECRET_KEY=config('OPENAI_SECRET_KEY',default=None,cast=str)
+# NASA API
+# NASA_API_KEY=config('NASA_API_KEY',default=None,cast=str)
 
 
 
@@ -85,6 +89,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "slippers",
     'profiles.apps.ProfilesConfig',
+    'subscriptions.apps.SubscriptionsConfig',
 ]
 ALLAUTH_UI_THEME = 'light'
 

@@ -1,0 +1,37 @@
+{% extends "allauth/layouts/base.html" %}
+
+{% block head_title %}
+Users - {{ block.super }}
+{% endblock head_title %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div>
+    <h1 class="text-lg font-medium">{{ instance.username }}</h1>
+
+    <ul>
+        {% if perms.auth.view_user %}
+        
+        <div>
+            {{ instance.first_name }} - {{ instance.last_name }}
+            <br>
+            Last Login: {{ instance.last_login }}
+        </div>
+        
+        <ul>
+            {% for user in objects_list %}
+                <li><a href="{% url 'profiles' username=user.username %}"> 
+                    <span><strong>{{ user.username }}</strong></span> 
+                </a></li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+            <div>
+                <span><blockquote>You are not allowed to access these data</blockquote></span>
+            </div>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+{% endblock content %}

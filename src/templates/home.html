@@ -7,9 +7,15 @@
 {% if request.user.is_authenticated%}Login Successfully tested{% endif %}
 
 <h1>There is our home page</h1>
-<p>Page Visits={{pagevisit_count}}</p>
-<p>Total Visits={{total_count}}</p>
-<p>Perecentage={{percent}}</p>
+<p>Page Visits={{page_visit_count}}</p>
+<p>Total Visits={{total_page_count}}</p>
+
+  
+
+<form action="" method="POST" ><input type="text" placeholder="Enter your Prompt" name="response"></input><button>Submit</button></form>
+{% if answer %}
+<h2>{{answer}}</h2>
+{% endif %}
 
 {% endblock content %}
 

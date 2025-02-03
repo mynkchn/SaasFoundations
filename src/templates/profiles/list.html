@@ -1,0 +1,22 @@
+{% extends "allauth/layouts/base.html" %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<div>
+    <h4>Users</h4>
+    <ul>
+        {% if perms.auth.view_user %}
+            {% for user in objects_list %}
+                <li><a href="{% url 'profiles' username=user.username %}"> 
+                    <span><strong>{{ user.username }}</strong></span> 
+                </a></li>
+            {% endfor %}
+        {% else %}
+            <div><span><blockquote>You are not allowed to access this data</blockquote></span></div>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock content %}

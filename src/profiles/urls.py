@@ -22,6 +22,7 @@ from .import views
 
 urlpatterns = [
   
-    path('<str:username>/',views.profile_view,name='profiles')
+    path('<str:username>/',views.profile_detail_view,name='profiles'),
+    path('',views.profile_list_view,name='list'),
 ]
 

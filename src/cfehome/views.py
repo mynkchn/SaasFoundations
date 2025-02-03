@@ -5,25 +5,29 @@ from visits.models import PageVisit
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
+import requests
+from .utils import get_response
+from django.http import JsonResponse
 
 LOGIN_URL=settings.LOGIN_URL
+# NASA_API_KEY=getattr(settings,'NASA_API_KEY')
 
 def home_page_view(request,*args, **kwargs) :
-
       qs=PageVisit.objects.all()
-      page_visits=PageVisit.objects.filter(path=request.path)
-
+      pagevisit_add=PageVisit.objects.create(path=request.path)
+      pagevisit=PageVisit.objects.filter(path=request.path)
       context={
-            
-            'pagevisit_count':page_visits.count(),
-            'total_count':qs.count(),
-            'percent':(page_visits.count()*100.0)/  qs.count() if qs.count() > 0 else 0,
+         'total_page_count':qs.count(),
+         'page_visit_count':pagevisit.count(),
+
       }
-      if not page_visits.exists():
-        PageVisit.objects.create(path=request.path)
+      if request.method=='POST' :
+         response=request.POST['response']
+         answer=get_response(response)
+         return JsonResponse(answer)
+      
 
-      return render(request,'home.html',context)
-
+      return JsonResponse(context)
 
 VALID_CODE='abc123'
 def pw_protected_view(request,*args,**kwargs) :
@@ -41,7 +45,8 @@ def pw_protected_view(request,*args,**kwargs) :
 
 @login_required(login_url=LOGIN_URL)
 def user_only_view(request,*args,**kwargs) :
-   return render(request,'protected/user-only.html',{})
+
+     return render(request,'protected/user-only.html',{})
 
 @staff_member_required(login_url=LOGIN_URL)
 def staff_only_view(request,*args,**kwargs) :
