@@ -27,7 +27,7 @@ def home_page_view(request,*args, **kwargs) :
          return JsonResponse(answer)
       
 
-      return JsonResponse(context)
+      return render(request,'home.html',context)
 
 VALID_CODE='abc123'
 def pw_protected_view(request,*args,**kwargs) :
