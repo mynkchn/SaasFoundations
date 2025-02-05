@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect
 from django.contrib import messages
 from visits.models import PageVisit
 from django.contrib.auth.decorators import login_required
