@@ -16,6 +16,7 @@ def home_page_view(request,*args, **kwargs) :
       qs=PageVisit.objects.all()
       pagevisit_add=PageVisit.objects.create(path=request.path)
       pagevisit=PageVisit.objects.filter(path=request.path)
+      
       context={
          'total_page_count':qs.count(),
          'page_visit_count':pagevisit.count(),
