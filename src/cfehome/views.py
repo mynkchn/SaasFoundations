@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 import requests
-from .utils import get_response
 from django.http import JsonResponse
 
 LOGIN_URL=settings.LOGIN_URL
@@ -24,8 +23,7 @@ def home_page_view(request,*args, **kwargs) :
       }
       if request.method=='POST' :
          response=request.POST['response']
-         answer=get_response(response)
-         return JsonResponse(answer)
+         return JsonResponse(response)
       
 
       return render(request,'home.html',context)
