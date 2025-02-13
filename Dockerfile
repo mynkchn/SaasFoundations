@@ -69,6 +69,7 @@ RUN python manage.py vendor_pull
 # such as:
 
 RUN python manage.py collectstatic --noinput
+RUN python manage.py sync_subs
 
 # set the Django default project name
 ARG PROJ_NAME="cfehome"

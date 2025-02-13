@@ -14,5 +14,4 @@ def download_to_local(url:str,out_path:Path,parent_mkdir:bool=True):
      return True
     except requests.RequestException as e :
        print(f'Failed to download {url}: {e}')
-       
        return False

@@ -51,4 +51,9 @@ def user_only_view(request,*args,**kwargs) :
 
 @staff_member_required(login_url=LOGIN_URL)
 def staff_only_view(request,*args,**kwargs) :
+   
    return render(request,'protected/user-only.html',{})
+
+
+        
+
