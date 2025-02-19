@@ -6,9 +6,6 @@ class Command(BaseCommand) :
     def handle(self,*args:Any,**options:Any) :
         qs=Subscriptions.objects.filter(active=True)
         for obj in qs:
-            print(qs) 
-            for group in obj.groups.all():
-                print(group)
-                for per in obj.permissions.all() :
-                    print(per)
-                    group.permissions.add(per)
+           sub_perms=obj.permissions.all()
+           for group in obj.groups.all():
+                group.permissions.set(sub_perms)
