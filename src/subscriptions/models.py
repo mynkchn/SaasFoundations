@@ -33,14 +33,20 @@ def user_sub_post_save(sender,instance,*args, **kwargs):
     user_sub_instance=instance
     user=user_sub_instance.user
     subscription_obj=user_sub_instance.subscriptions
-    groups=subscription_obj.groups.all()
+    groups_ids=[]
+    if subscription_obj is not None :
+ 
+     groups=subscription_obj.groups.all()
+     groups_ids=groups.values_list('id',flat=True)
     if not ALLOW_CUSTOM_GROUPS:
      user.groups.set(groups)
     else :
-        sub_qs=Subscriptions.objects.filter(active=True).exclude(id=subscription_obj.id)
+        sub_qs=Subscriptions.objects.filter(active=True)
+        if subscription_obj is not None:
+         sub_qs=sub_qs.exclude(id=subscription_obj.id)
         subs_groups=sub_qs.values_list('groups__id',flat=True)
         subs_groups_sets=set(subs_groups)
-        groups_ids=groups.values_list('id',flat=True)
+    
         current_groups=user.groups.all().values_list('id',flat=True)
         groups_ids_set=set(groups_ids)
         current_groups_set=set(current_groups) - subs_groups_sets
