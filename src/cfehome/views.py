@@ -12,21 +12,29 @@ LOGIN_URL=settings.LOGIN_URL
 # NASA_API_KEY=getattr(settings,'NASA_API_KEY')
 
 def home_page_view(request,*args, **kwargs) :
-      qs=PageVisit.objects.all()
-      pagevisit_add=PageVisit.objects.create(path=request.path)
-      pagevisit=PageVisit.objects.filter(path=request.path)
+    try:
+        qs = PageVisit.objects.all()
+        pagevisit_add = PageVisit.objects.create(path=request.path)
+        pagevisit = PageVisit.objects.filter(path=request.path)
+
       
-      context={
-         'total_page_count':qs.count(),
-         'page_visit_count':pagevisit.count(),
+        context = {
+            'total_page_count': qs.count(),
+            'page_visit_count': pagevisit.count(),
+
 
       }
-      if request.method=='POST' :
-         response=request.POST['response']
-         return JsonResponse(response)
+        if request.method == 'POST':
+            response = request.POST['response']
+            return JsonResponse(response)
+
       
 
-      return render(request,'home.html',context)
+        return render(request, 'home.html', context)
+    except Exception as e:
+        messages.error(request, f"An error occurred: {str(e)}")
+        return render(request, 'home.html', context)
+
 
 VALID_CODE='abc123'
 def pw_protected_view(request,*args,**kwargs) :
@@ -51,7 +59,3 @@ def user_only_view(request,*args,**kwargs) :
 def staff_only_view(request,*args,**kwargs) :
    
    return render(request,'protected/user-only.html',{})
-
-
-        
-
